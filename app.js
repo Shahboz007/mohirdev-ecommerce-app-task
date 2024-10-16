@@ -21,9 +21,12 @@ app.use(express.urlencoded({ extends: false }));
 // Public static folder
 app.use(express.static(path.join(__dirname, "public")));
 
+// Routes
+app.use('/auth', require('./routes/auth'));
 app.use("/", (req, res) => {
     return res.render("index", { title: "Home page" });
 });
+
 
 const PORT = process.env.PORT || 3030;
 
