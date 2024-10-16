@@ -12,13 +12,17 @@ app.set("views", path.join(__dirname, "views"));
 
 // Initial template layout
 app.use(expressLayouts);
-app.set('layout','layout/main')
+app.set("layout", "layout/main");
 
+// Express requests
 app.use(express.json());
 app.use(express.urlencoded({ extends: false }));
 
+// Public static folder
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use("/", (req, res) => {
-    return res.render("index", {title: 'Home page'});
+    return res.render("index", { title: "Home page" });
 });
 
 const PORT = process.env.PORT || 3030;
