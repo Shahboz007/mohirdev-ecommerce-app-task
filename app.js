@@ -3,8 +3,12 @@ const dotenv = require("dotenv").config();
 const path = require("path");
 const colors = require("colors");
 const expressLayouts = require("express-ejs-layouts");
+const connectDB = require('./config/db');
 
 const app = express();
+
+// Connection  to database
+connectDB();
 
 // Initial template engine
 app.set("view engine", "ejs");
