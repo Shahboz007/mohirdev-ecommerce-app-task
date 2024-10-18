@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extends: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
-app.use('/auth', require('./routes/auth'));
+app.use('/auth', require('./routes/auth.route'));
 app.use("/", (req, res) => {
     return res.render("index", { title: "Home page" });
 });

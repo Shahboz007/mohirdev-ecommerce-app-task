@@ -1,13 +1,34 @@
 // Desc      Get login page
 // Route     GET /auth/login
+
+const User = require("../models/user.model");
+
 // Access    Public
-exports.login = async (req, res) => {
+exports.loginPage = async (req, res) => {
     return res.render("auth/login", { title: "Login" });
 };
 
 // Desc      Get register page
 // Route     GET /auth/register
 // Access    Public
-exports.register = async (req, res) => {
+exports.registerPage = async (req, res) => {
     return res.render("auth/register", { title: "Register" });
+};
+// Desc      Register user
+// Route     POST /auth/register
+// Access    Public
+exports.registerUser = async (req, res) => {
+    const { name, email, password, confirmPassword } = req.body;
+
+    if (password !== confirmPassword) {
+        return res.send("Password and confirm password not match");
+    }
+
+    await User.create({
+        name,
+        email,
+        password,
+    });
+
+    return res.redirect("/profile");
 };
