@@ -18,9 +18,9 @@ exports.registerPage = async (req, res) => {
 // Route     POST /auth/register
 // Access    Public
 exports.registerUser = async (req, res) => {
-    const { name, email, password, confirmPassword } = req.body;
+    const { name, email, password, confirm_password } = req.body;
 
-    if (password !== confirmPassword) {
+    if (password !== confirm_password) {
         return res.send("Password and confirm password not match");
     }
 
