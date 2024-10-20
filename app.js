@@ -3,18 +3,29 @@ const dotenv = require("dotenv").config();
 const path = require("path");
 const colors = require("colors");
 const expressLayouts = require("express-ejs-layouts");
-const connectDB = require('./config/db');
+const connectDB = require("./config/db");
+const flash = require("connect-flash/lib/flash");
+const session = require("express-session");
 
 const app = express();
 
 // Connection  to database
 connectDB();
 
-// Initial template engine
+// Initialize session
+app.use(
+    session({
+        secret: "your_secret_key",
+        resave: false,
+        saveUninitialized: true,
+    })
+);
+
+// Initialize template engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Initial template layout
+// Initialize template layout
 app.use(expressLayouts);
 app.set("layout", "layout/main");
 
@@ -25,12 +36,19 @@ app.use(express.urlencoded({ extends: false }));
 // Public static folder
 app.use(express.static(path.join(__dirname, "public")));
 
+// Initialize message
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash("success_msg");
+    res.locals.error_msg = req.flash("error_msg");
+    next();
+});
+
 // Routes
-app.use('/auth', require('./routes/auth.route'));
+app.use("/auth", require("./routes/auth.route"));
 app.use("/", (req, res) => {
     return res.render("index", { title: "Home page" });
 });
-
 
 const PORT = process.env.PORT || 3030;
 
