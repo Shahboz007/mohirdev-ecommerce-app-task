@@ -6,11 +6,11 @@
         <h2 class="text-2xl font-bold mb-6 text-center">Register</h2>
 
         <!-- Display error message alert -->
-        <% if (error_msg) { %>
+        <% if (errorMsg) { %>
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
                 <strong class="font-bold">Error:</strong>
                 <span class="block sm:inline">
-                    <%= error_msg %>
+                    <%= errorMsg %>
                 </span>
                 <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
                     <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
                         <input autofocus type="text" id="name" name="name"
                             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter your name" required>
+                            placeholder="Enter your name" required value="<%=oldInput?.name%>">
                     </div>
 
                     <!-- Email Input -->
@@ -37,7 +37,7 @@
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                         <input type="email" id="email" name="email"
                             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter your email" required>
+                            placeholder="Enter your email" required value="<%=oldInput?.email%>">
                     </div>
 
                     <!-- Password Input -->
@@ -45,7 +45,7 @@
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
                         <input type="password" id="password" name="password"
                             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter your password" required>
+                            placeholder="Enter your password" required value="<%=oldInput?.password%>">
                     </div>
 
                     <!-- Confirm Password Input -->
@@ -54,7 +54,7 @@
                             Password</label>
                         <input type="password" id="confirm_password" name="confirm_password"
                             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Confirm your password" required>
+                            placeholder="Confirm your password" required value="<%=oldInput?.confirm_password%>">
                     </div>
 
                     <!-- Submit Button -->

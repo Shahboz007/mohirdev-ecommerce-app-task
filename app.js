@@ -38,12 +38,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Initialize message
 app.use(flash());
-app.use((req, res, next) => {
-    res.locals.success_msg = req.flash("success_msg");
-    res.locals.error_msg = req.flash("error_msg");
-    next();
-});
-
 // Routes
 app.use("/auth", require("./routes/auth.route"));
 app.use("/", (req, res) => {
