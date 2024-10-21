@@ -13,7 +13,11 @@ exports.loginPage = async (req, res) => {
 // Route     GET /auth/register
 // Access    Public
 exports.registerPage = async (req, res) => {
-    return res.render("auth/register", { title: "Register", oldInput: null });
+    return res.render("auth/register", {
+        title: "Register",
+        errorMsg: "",
+        oldInput: null,
+    });
 };
 // Desc      Register user
 // Route     POST /auth/register
@@ -25,6 +29,7 @@ exports.registerUser = async (req, res) => {
     if (!error.isEmpty()) {
         return res.status(400).render("auth/register", {
             title: "Register",
+            errorMsg: error.array()[0].msg,
             oldInput: {
                 name,
                 email,
@@ -35,10 +40,10 @@ exports.registerUser = async (req, res) => {
     }
 
     if (password !== confirm_password) {
-        req.flash("error_msg", "Password and confirm password not match");
+        req.flash("errorMsg", "Password and confirm password not match");
         return res.status(400).render("auth/register", {
             title: "Register",
-            errorMsg: req.flash('error_msg'),
+            errorMsg: req.flash("errorMsg"),
             oldInput: {
                 name,
                 email,
