@@ -1,9 +1,9 @@
-// Desc      Get login page
-// Route     GET /auth/login
 
 const { validationResult } = require("express-validator");
 const User = require("../models/user.model");
 
+// Desc      Get login page
+// Route     GET /auth/login
 // Access    Public
 exports.loginPage = async (req, res) => {
     return res.render("auth/login", { title: "Login" });
