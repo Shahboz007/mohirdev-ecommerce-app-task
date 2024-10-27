@@ -3,10 +3,11 @@ const { body } = require("express-validator");
 const {
     loginPage,
     registerPage,
-    registerUser,
+    registerUser, loginUser,
 } = require("../controllers/auth.controller");
 
 router.get("/login", loginPage);
+router.post("/login", loginUser);
 router.get("/register", registerPage);
 router.post(
     "/register",

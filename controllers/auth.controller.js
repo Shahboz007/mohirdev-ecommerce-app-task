@@ -1,6 +1,6 @@
 
 const { validationResult } = require("express-validator");
-const User = require("../models/user.model");
+const User = require("../models/User");
 
 // Desc      Get login page
 // Route     GET /auth/login
@@ -8,6 +8,18 @@ const User = require("../models/user.model");
 exports.loginPage = async (req, res) => {
     return res.render("auth/login", { title: "Login" });
 };
+
+// Desc      User login
+// Route     POST /auth/login
+// Access    Protected
+exports.loginUser = async(req, res, next) => {
+    const { email, password } = req.body;
+    try {
+
+    }catch (error){
+        next(error);
+    }
+}
 
 // Desc      Get register page
 // Route     GET /auth/register
