@@ -6,6 +6,8 @@ const expressLayouts = require("express-ejs-layouts");
 const connectDB = require("./config/db");
 const flash = require("connect-flash/lib/flash");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
+const { default: mongoose } = require("mongoose");
 
 const app = express();
 
@@ -15,9 +17,18 @@ connectDB();
 // Initialize session
 app.use(
     session({
+        store: MongoStore.create({
+            client: mongoose.connection.getClient(),
+            collectionName: "user_sessions",
+        }),
         secret: "your_secret_key",
         resave: false,
         saveUninitialized: true,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+        },
     })
 );
 
@@ -39,10 +50,9 @@ app.use(express.static(path.join(__dirname, "public")));
 // Initialize message
 app.use(flash());
 
-
 // Routes
 app.use("/auth", require("./routes/auth.route"));
-app.use('/dashboard', require("./routes/dashboard/dashboard.route"));
+app.use("/dashboard", require("./routes/dashboard/dashboard.route"));
 app.use("/", (req, res) => {
     return res.render("index", { title: "Home page" });
 });
