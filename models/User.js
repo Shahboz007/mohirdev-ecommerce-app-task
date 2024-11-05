@@ -29,6 +29,14 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        carts: {
+            type: mongoose.Types.ObjectId,
+            ref: "Cart",
+        },
+        orders: {
+            type: mongoose.Types.ObjectId,
+            ref: "Order",
+        },
     },
     {
         timestamps: true,
@@ -44,6 +52,5 @@ userSchema.pre("save", async function (next) {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
 });
-
 
 module.exports = mongoose.model("User", userSchema);

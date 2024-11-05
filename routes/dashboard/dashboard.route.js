@@ -1,6 +1,9 @@
-const {getDashboardHomePage} = require("../../controllers/dashboard/dashboardHome.controller");
-const router = require('express').Router();
+const {
+    getDashboardHomePage,
+} = require("../../controllers/dashboard/dashboardHome.controller");
+const router = require("express").Router();
+const { protected } = require("../../middlewares/auth");
 
-router.get('/', getDashboardHomePage)
+router.get("/", protected, getDashboardHomePage);
 
 module.exports = router;

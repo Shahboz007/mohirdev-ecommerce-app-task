@@ -3,7 +3,8 @@ const { body } = require("express-validator");
 const {
     loginPage,
     registerPage,
-    registerUser, loginUser,
+    registerUser,
+    loginUser,
 } = require("../controllers/auth.controller");
 
 router.get("/login", loginPage);
@@ -17,8 +18,7 @@ router.post(
         body(
             "password",
             "Please enter password with minimum 6 characters values"
-        )
-            .isLength({ min: 6 })
+        ).isLength({ min: 6 }),
         // body("confirmPassword", "Password do not match").custom(
         //     (value, { req }) => {
         //         if (value !== req.body.password) {

@@ -1,6 +1,6 @@
-
 const { validationResult } = require("express-validator");
 const User = require("../models/User");
+const bcrypt = require("bcryptjs");
 
 // Desc      Get login page
 // Route     GET /auth/login
@@ -12,14 +12,55 @@ exports.loginPage = async (req, res) => {
 // Desc      User login
 // Route     POST /auth/login
 // Access    Protected
-exports.loginUser = async(req, res, next) => {
+exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
     try {
+        const isAuthenticated = req.session.isLogged;
+        const errors = validationResult(req);
 
-    }catch (error){
-        next(error);
+        if (!errors.isEmpty()) {
+            return res.status(400).render("auth/login", {
+                title: "Login",
+                isAuthenticated,
+                errorMessage: errors.array()[0].msg,
+                oldInput: {
+                    email,
+                },
+            });
+        }
+
+        const userExist = await User.findOne({ email });
+        if (userExist) {
+            const matchPassword = await bcrypt.compare(
+                password,
+                userExist.password
+            );
+            if (matchPassword) {
+                req.session.isLogged = true;
+                req.session.user = userExist;
+                req.session.save((err) => {
+                    if (err) throw err;
+                    return res.redirect("/dashboard");
+                });
+            } else {
+                req.flash("error", "You entered wrong email or password");
+                return res.status(400).render("auth/login", {
+                    title: "Login",
+                    isAuthenticated,
+                    errorMessage: req.flash("error"),
+                    oldInput: {
+                        email: req.body.email,
+                    },
+                });
+            }
+        } else {
+            req.flash("error", "You entered wrong email or password");
+            return res.redirect("/auth/login");
+        }
+    } catch (error) {
+        console.log(error);
     }
-}
+};
 
 // Desc      Get register page
 // Route     GET /auth/register
