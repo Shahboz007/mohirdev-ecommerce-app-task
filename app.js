@@ -57,9 +57,6 @@ app.use("/", (req, res) => {
     return res.render("index", { title: "Home page" });
 });
 
-// Error middleware
-app.use()
-
 const PORT = process.env.PORT || 3030;
 
 app.listen(PORT, () => {
