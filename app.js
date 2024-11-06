@@ -51,11 +51,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
 
 // Routes
-app.use('/', require('./routes/main.route'));
-app.use("/auth", require("./routes/auth.route"));
-app.use("/dashboard", require("./routes/dashboard/dashboard.route"));
-app.use("/dashboard/users", require('./routes/dashboard/dashboardUser.route'));
-app.use("/dashboard/products", require('./routes/dashboard/dashboardProduct.route'));
+app.use('/', require('./routes/mainRoute'));
+app.use("/auth", require("./routes/authRoute"));
+app.use("/dashboard", require("./routes/dashboard/dashboardRoute"));
+app.use("/dashboard/users", require('./routes/dashboard/dashboardUserRoute'));
+app.use("/dashboard/products", require('./routes/dashboard/dashboardProductRoute'));
+app.use("/dashboard/reports", require('./routes/dashboard/dashboardReportRoute'));
 
 const PORT = process.env.PORT || 3030;
 
