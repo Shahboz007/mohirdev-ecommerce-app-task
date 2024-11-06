@@ -51,12 +51,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
 
 // Routes
-// app.use("/", (req, res) => {
-//     return res.redirect('/home')
-// });
 app.use('/', require('./routes/main.route'));
 app.use("/auth", require("./routes/auth.route"));
 app.use("/dashboard", require("./routes/dashboard/dashboard.route"));
+app.use("/dashboard/users", require('./routes/dashboard/dashboardUser.route'));
 
 const PORT = process.env.PORT || 3030;
 
