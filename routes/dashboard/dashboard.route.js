@@ -1,6 +1,6 @@
 const {
     getDashboardHomePage,
-} = require("../../controllers/dashboard/dashboardHome.controller");
+} = require("../../controllers/dashboard/dashboardHomeController");
 const router = require("express").Router();
 const { protected } = require("../../middlewares/auth");
 

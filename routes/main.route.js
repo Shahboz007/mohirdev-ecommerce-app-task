@@ -1,4 +1,4 @@
-const { getHomePage, getDetailsPage } = require('../controllers/main.controller');
+const { getHomePage, getDetailsPage } = require('../controllers/mainController');
 
 const router = require('express').Router();
 
