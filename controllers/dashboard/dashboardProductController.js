@@ -1,5 +1,5 @@
 exports.getProductPage = async (req, res) => {
-    return res.render('')
+    return res.render("dashboard/dashboardProduct", { title: "Products" });
 };
 exports.getCreateProductPage = async (req, res) => {};
 exports.createProduct = async (req, res) => {};

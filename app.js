@@ -55,6 +55,7 @@ app.use('/', require('./routes/main.route'));
 app.use("/auth", require("./routes/auth.route"));
 app.use("/dashboard", require("./routes/dashboard/dashboard.route"));
 app.use("/dashboard/users", require('./routes/dashboard/dashboardUser.route'));
+app.use("/dashboard/products", require('./routes/dashboard/dashboardProduct.route'));
 
 const PORT = process.env.PORT || 3030;
 
