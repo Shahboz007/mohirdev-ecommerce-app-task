@@ -49,11 +49,19 @@ exports.updateProduct = async (req, res) => {
   const {} = req.body;
 
   try {
-    await Product.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
     res.redirect("/dashboard/products");
   } catch (err) {
     console.log(err);
   }
 };
-exports.deleteProduct = async (req, res) => {};
+exports.deleteProduct = async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+
+    res.redirect("/dashboard/products");
+  } catch (err) {
+    console.log(err);
+  }
+};
