@@ -1,0 +1,48 @@
+<%- include('../../partials/dashboardHeaderAndSidebar.ejs') %>
+ <!-- User Form -->
+ <div class="bg-white p-6 rounded-lg shadow-lg mt-6">
+  <h2 class="text-gray-700 font-semibold mb-4">Edit User</h2>
+  <form method="POST">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      
+      <!-- Name -->
+      <div>
+        <label class="block text-gray-600 mb-2">Name</label>
+        <input type="text" class="w-full p-3 rounded border border-gray-300" placeholder="Enter user name" required name="name" value="<%=initialValues.name%>">
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block text-gray-600 mb-2">Email</label>
+        <input type="email" class="w-full p-3 rounded border border-gray-300" placeholder="Enter user email" required name="email" value="<%=initialValues.email%>">
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label class="block text-gray-600 mb-2">Password</label>
+        <input type="password" class="w-full p-3 rounded border border-gray-300" placeholder="Enter password (min 6 characters)" minlength="6" name="password">
+      </div>
+
+      <!-- Admin Status -->
+      <div>
+        <label class="block text-gray-600 mb-2">Admin Status</label>
+        <select class="w-full p-3 rounded border border-gray-300" name="adminStatus">
+          <option value="false" selected>User</option>
+          <option value="true" selected="<%-initialValues.adminStatus%>">Admin</option>
+        </select>
+      </div>
+
+      <!-- Active Status -->
+      <div>
+        <label class="block text-gray-600 mb-2">Active Status</label>
+        <select class="w-full p-3 rounded border border-gray-300" name="isActive">
+          <option value="false">Inactive</option>
+          <option value="true" selected="<%-initialValues.isActive%>">Active</option>
+        </select>
+      </div>
+      
+    </div>
+    <button type="submit" class="mt-4 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Save</button>
+  </form>
+</div>
+<%- include('../../partials/dashboardFooter.ejs')%>

@@ -21,23 +21,51 @@ exports.createUser = async (req, res) => {
       name,
       email,
       password,
-      adminStatus,
-      isActive,
+      adminStatus: adminStatus === 'true',
+      isActive: isActive === 'true',
     });
 
-    res.redirect('/dashboard/users')
+    res.redirect("/dashboard/users");
   } catch (err) {
     console.log(err);
   }
 };
-exports.getUpdateUserPage = async (req, res) => {};
-exports.updateUser = async (req, res) => {};
-exports.deleteUser = async (req, res) => {
+exports.getUpdateUserPage = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.render("dashboard/user/dashboardUserUpdate", {
+      title: "Update User",
+      initialValues: user,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+exports.updateUser = async (req, res) => {
+  const { name, email, password, adminStatus, isActive } = req.body;
+
   try{
-    await User.findByIdAndDelete(req.params.id);
+    const user = await User.findById(req.params.id);
+
+    if(name) user.name = name;
+    if(email) user.email = email;
+    if(password) user.password = password;
+    user.adminStatus = adminStatus === 'true';
+    user.isActive = isActive === 'true';
+
+    user.save();
 
     res.redirect('/dashboard/users')
   }catch(err){
     console.log(err)
+  }
+};
+exports.deleteUser = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+
+    res.redirect("/dashboard/users");
+  } catch (err) {
+    console.log(err);
   }
 };

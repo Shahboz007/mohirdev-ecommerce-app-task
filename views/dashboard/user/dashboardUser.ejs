@@ -10,10 +10,10 @@
                     <tr>
                         <th class="w-1/4 py-3 px-4 text-left text-sm font-semibold">Name</th>
                         <th class="w-1/4 py-3 px-4 text-left text-sm font-semibold">Email</th>
-                        <th class="w-1/4 py-3 px-4 text-left text-sm font-semibold">Role</th>
-                        <th class="w-1/4 py-3 px-4 text-left text-sm font-semibold">Is Active</th>
-                        <th class="w-1/4 py-3 px-4 text-left text-sm font-semibold">Created At</th>
-                        <th class="w-1/4 py-3 px-4 text-left text-sm font-semibold">Updated At</th>
+                        <th class="w-1/4 py-3 px-4 text-left text-sm font-semibold">Is&nbsp;Admin</th>
+                        <th class="w-1/4 py-3 px-4 text-left text-sm font-semibold">Is&nbsp;Active</th>
+                        <th class="w-1/4 py-3 px-4 text-left text-sm font-semibold">Created&nbsp;At</th>
+                        <th class="w-1/4 py-3 px-4 text-left text-sm font-semibold">Updated&nbsp;At</th>
                         <th class="w-1/4 py-3 px-4 text-center text-sm font-semibold">Actions</th>
                     </tr>
                 </thead>
@@ -23,12 +23,12 @@
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
                             <td class="py-3 px-4"><%-item.name%></td>
                             <td class="py-3 px-4"><%-item.email%></td>
-                            <td class="py-3 px-4"><%-item.isAdmin%></td>
+                            <td class="py-3 px-4"><%-item.adminStatus%></td>
                             <td class="py-3 px-4"><%-item.isActive%></td>
                             <td class="py-3 px-4"><%-item.createdAt.toLocaleDateString()%></td>
                             <td class="py-3 px-4"><%-item.updatedAt.toLocaleDateString()%></td>
                             <td class="py-3 px-4 text-center">
-                                <button class="text-blue-500 hover:text-blue-700">Edit</button>
+                                <a href="/dashboard/users/<%=item._id%>/update" class="text-blue-500 hover:text-blue-700">Edit</a>
                                 <form action="/dashboard/users/<%=item._id%>/delete" method="POST">
                                     <button class="text-red-500 hover:text-red-700 ml-4" type="submit">Delete</button>
                                 </form>
