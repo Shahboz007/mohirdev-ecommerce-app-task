@@ -114,3 +114,14 @@ exports.registerUser = async (req, res) => {
 
     return res.redirect("/profile");
 };
+
+
+exports.logout = async(req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Error destroying session:', err);
+            return res.status(500).send("Failed to log out.");
+        }
+        res.redirect('/auth/login');
+    });
+}
