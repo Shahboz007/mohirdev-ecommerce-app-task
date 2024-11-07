@@ -5,12 +5,14 @@ const {
     updateUser,
     createUser,
     deleteUser,
+    getCreateUserPage,
 } = require("../../controllers/dashboard/dashboardUserController");
 
 router.get("/", getUsersPage);
-router.get("/", getUpdateUserPage);
-router.post("/", createUser);
-router.post("/:id", updateUser);
-router.post("/:id", deleteUser);
+router.get("/create", getCreateUserPage);
+router.post("/create", createUser);
+router.get("/:id/update", getUpdateUserPage);
+router.post("/:id/update", updateUser);
+router.post("/:id/delete", deleteUser);
 
 module.exports = router;
