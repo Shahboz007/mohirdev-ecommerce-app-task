@@ -32,4 +32,12 @@ exports.createUser = async (req, res) => {
 };
 exports.getUpdateUserPage = async (req, res) => {};
 exports.updateUser = async (req, res) => {};
-exports.deleteUser = async (req, res) => {};
+exports.deleteUser = async (req, res) => {
+  try{
+    await User.findByIdAndDelete(req.params.id);
+
+    res.redirect('/dashboard/users')
+  }catch(err){
+    console.log(err)
+  }
+};
