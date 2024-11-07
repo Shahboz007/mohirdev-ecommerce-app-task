@@ -45,5 +45,15 @@ exports.getUpdateProductPage = async (req, res) => {
     console.log(err);
   }
 };
-exports.updateProduct = async (req, res) => {};
+exports.updateProduct = async (req, res) => {
+  const {} = req.body;
+
+  try {
+    await Product.findByIdAndUpdate(req.params.id, req.body, {new: true});
+
+    res.redirect("/dashboard/products");
+  } catch (err) {
+    console.log(err);
+  }
+};
 exports.deleteProduct = async (req, res) => {};
