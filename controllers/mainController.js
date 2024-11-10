@@ -1,5 +1,11 @@
+const Product = require("../models/Product");
 exports.getHomePage = async(req, res) => {
-    res.render("index", { title: "Home page", isAuth: Boolean(req.session.user) });
+    try{
+        const products = await Product.find();
+        res.render("index", { title: "Home page", isAuth: Boolean(req.session.user), productsData: products });
+    }catch (error){
+        console.log(error);
+    }
 }
 
 exports.getDetailsPage = async(req, res) => {
