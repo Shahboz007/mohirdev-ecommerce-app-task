@@ -7,12 +7,14 @@ const {
     updateProduct,
     deleteProduct,
 } = require("../../controllers/dashboard/dashboardProductController");
+const roleMiddleware = require("../../middlewares/role");
+const {protected} = require("../../middlewares/auth");
 
-router.get("/", getProductPage);
-router.get("/create", getCreateProductPage);
-router.post("/create", createProduct);
-router.get("/:id/update", getUpdateProductPage);
-router.post("/:id/update", updateProduct);
-router.post("/:id/delete", deleteProduct);
+router.get("/", protected, roleMiddleware(['admin']), getProductPage);
+router.get("/create", protected, roleMiddleware(['admin']), getCreateProductPage);
+router.post("/create", protected, roleMiddleware(['admin']), createProduct);
+router.get("/:id/update", protected, roleMiddleware(['admin']), getUpdateProductPage);
+router.post("/:id/update", protected, roleMiddleware(['admin']), updateProduct);
+router.post("/:id/delete", protected, roleMiddleware(['admin']), deleteProduct);
 
 module.exports = router;
