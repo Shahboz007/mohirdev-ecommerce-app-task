@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema(
         },
         isActive: {
             type: Boolean,
-            default: false,
+            default: true,
         },
         carts: {
             type: mongoose.Types.ObjectId,

@@ -1,4 +1,4 @@
-const { validationResult } = require("express-validator");
+const {validationResult} = require("express-validator");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
@@ -6,14 +6,14 @@ const bcrypt = require("bcryptjs");
 // Route     GET /auth/login
 // Access    Public
 exports.loginPage = async (req, res) => {
-    return res.render("auth/login", { title: "Login" });
+    return res.render("auth/login", {title: "Login"});
 };
 
 // Desc      User login
 // Route     POST /auth/login
 // Access    Protected
 exports.loginUser = async (req, res) => {
-    const { email, password } = req.body;
+    const {email, password} = req.body;
     try {
         const isAuthenticated = req.session.isLogged;
         const errors = validationResult(req);
@@ -29,8 +29,10 @@ exports.loginUser = async (req, res) => {
             });
         }
 
-        const userExist = await User.findOne({ email });
+        const userExist = await User.findOne({email});
         if (userExist) {
+            if(!userExist.isActive) return res.status(403).redirect('/auth/login');
+
             const matchPassword = await bcrypt.compare(
                 password,
                 userExist.password
@@ -40,7 +42,13 @@ exports.loginUser = async (req, res) => {
                 req.session.user = userExist;
                 req.session.save((err) => {
                     if (err) throw err;
-                    return res.redirect("/dashboard");
+
+                    // For admin
+                    if (userExist.adminStatus) {
+                        return res.redirect("/dashboard");
+                    }
+
+                    return res.redirect("/profile");
                 });
             } else {
                 req.flash("error", "You entered wrong email or password");
@@ -76,7 +84,7 @@ exports.registerPage = async (req, res) => {
 // Route     POST /auth/register
 // Access    Public
 exports.registerUser = async (req, res) => {
-    const { name, email, password, confirm_password } = req.body;
+    const {name, email, password, confirm_password} = req.body;
     const error = validationResult(req);
 
     if (!error.isEmpty()) {
@@ -116,7 +124,7 @@ exports.registerUser = async (req, res) => {
 };
 
 
-exports.logout = async(req, res) => {
+exports.logout = async (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             console.error('Error destroying session:', err);
