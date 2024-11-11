@@ -120,7 +120,7 @@ exports.registerUser = async (req, res) => {
         password,
     });
 
-    return res.redirect("/profile");
+    return res.redirect("/auth/login");
 };
 
 

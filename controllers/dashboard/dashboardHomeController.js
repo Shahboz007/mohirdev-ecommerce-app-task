@@ -24,7 +24,7 @@ exports.updateDashboardUser = async (req, res) => {
         if (name) user.name = name;
         if (email) user.email = email;
 
-        user.save();
+        await user.save();
 
         res.redirect('/dashboard/settings');
     } catch (error) {

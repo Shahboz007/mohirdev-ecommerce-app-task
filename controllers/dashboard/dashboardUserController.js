@@ -53,7 +53,7 @@ exports.updateUser = async (req, res) => {
     user.adminStatus = adminStatus === 'true';
     user.isActive = isActive === 'true';
 
-    user.save();
+    await user.save();
 
     res.redirect('/dashboard/users')
   }catch(err){
