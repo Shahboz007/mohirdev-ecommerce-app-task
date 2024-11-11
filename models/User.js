@@ -43,6 +43,13 @@ const userSchema = new mongoose.Schema(
     }
 );
 
+userSchema.virtual('cartCount', {
+    ref: "Cart",
+    localField: '_id',
+    foreignField: 'userId',
+    count: true
+})
+
 // Hashing password with bcrypt
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {

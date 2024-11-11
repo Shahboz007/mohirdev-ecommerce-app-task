@@ -4,8 +4,7 @@
       <div class="flex space-x-4">
         <a href="/" class="text-gray-800 hover:text-gray-600">Home</a>
         <a href="/products" class="text-gray-800 hover:text-gray-600">Products</a>
-        <a href="#" class="text-gray-800 hover:text-gray-600">About</a>
-        <a href="#" class="text-gray-800 hover:text-gray-600">Contact</a>
+        <a href="/carts" class="text-gray-800 hover:text-gray-600">Cart (<%=cartCount.toLocaleString()%>)</a>
         <%if (isAuth){%>
           <a href="/auth/logout" class="text-gray-800 hover:text-gray-600">Logout</a>
         <%} else {%>
