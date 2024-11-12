@@ -43,11 +43,35 @@ exports.addToCart = async (req, res) => {
 
     await cart.save();
 
-    const redirectUrl = req.get('Referer') || '/';
+    const redirectUrl = req.get("Referer") || "/";
     res.redirect(redirectUrl);
   } catch (error) {
     console.log(error);
   }
 };
-exports.removeFromCart = async (req, res) => {};
+exports.decrementFromCart = async (req, res) => {
+  const { productId, quantity = 1 } = req.body;
+
+  try {
+    const userId = req.session.user._id;
+    let cart = await Cart.findOne({ user: userId });
+
+    if (cart) {
+      const productIndex = cart.products.findIndex(
+        (item) => item.product.toString() === productId
+      );
+
+      if (productIndex > -1 && cart.products[productIndex].quantity > 1) {
+        cart.products[productIndex].quantity -= quantity;
+      }
+    }
+
+    await cart.save();
+
+    const redirectUrl = req.get("Referer") || "/";
+    res.redirect(redirectUrl);
+  } catch (error) {
+    console.log(error);
+  }
+};
 exports.clearCart = async (req, res) => {};
