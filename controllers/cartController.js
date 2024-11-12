@@ -6,7 +6,6 @@ exports.getCartPage = async (req, res) => {
     const cart = await Cart.findOne({ user: userId })
       .populate("products.product")
       .exec();
-    console.log("🚀 ~ exports.getCartPage= ~ cart:", cart)
 
     res.render("cart", {
       title: "My cart",
@@ -43,7 +42,9 @@ exports.addToCart = async (req, res) => {
     }
 
     await cart.save();
-    res.redirect(req.query.url || "/");
+
+    const redirectUrl = req.get('Referer') || '/';
+    res.redirect(redirectUrl);
   } catch (error) {
     console.log(error);
   }

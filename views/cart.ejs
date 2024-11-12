@@ -20,14 +20,19 @@
               </div>
               <div class="flex items-center">
                 <label for="quantity" class="mr-2 text-gray-600">Qty:</label>
-                <button type="submit" class="px-3 py-1 bg-gray-200 rounded-l text-gray-700 hover:bg-gray-300">
-                  -
-                </button>
-                <input type="number" id="quantity" min="1" value="<%-item.quantity%>" readonly
-                  class="w-16 p-2 border-t border-b text-center border-gray-300 focus:outline-none">
-                <button type="submit" class="px-3 py-1 bg-gray-200 rounded-r text-gray-700 hover:bg-gray-300">
-                  +
-                </button>
+                <form action="/carts/delete" method="post">
+                  <button type="submit" class="px-3 py-1 bg-gray-200 rounded-l text-gray-700 hover:bg-gray-300">
+                    -
+                  </button>
+                </form>
+                <form action="/carts" method="post">
+                  <input type="hidden" name="productId" value="<%=item.product._id%>" readonly>
+                  <input type="number" id="quantity" min="1" value="<%-item.quantity%>" readonly
+                    class="w-16 p-2 border-t border-b text-center border-gray-300 focus:outline-none">
+                  <button type="submit" class="px-3 py-1 bg-gray-200 rounded-r text-gray-700 hover:bg-gray-300">
+                    +
+                  </button>
+                </form>
               </div>
               <div class="ml-4 font-semibold text-gray-800">$<%-(item.product.price*item.quantity).toLocaleString()%>
               </div>
