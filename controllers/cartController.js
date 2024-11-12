@@ -3,13 +3,14 @@ const Cart = require("../models/Cart");
 exports.getCartPage = async (req, res) => {
   try {
     const userId = req.session.user._id;
-    const cart = await Cart.findOne({ user: userId }).populate(
-      "products.product"
-    );
+    const cart = await Cart.findOne({ user: userId })
+      .populate("products.product")
+      .exec();
+
     res.render("cart", {
       title: "My cart",
       cart,
-      cartCount: 0,
+      cartCount: cart.productCount,
       isAuth: Boolean(req.session.user),
     });
   } catch (error) {
@@ -20,7 +21,7 @@ exports.addToCart = async (req, res) => {
   const { productId, quantity = 1 } = req.body;
 
   try {
-    const userId = req.user._id;
+    const userId = req.session.user._id;
     let cart = await Cart.findOne({ user: userId });
 
     if (!cart) {
@@ -41,7 +42,7 @@ exports.addToCart = async (req, res) => {
     }
 
     await cart.save();
-    res.redirect("back");
+    res.redirect(req.query.url || "/");
   } catch (error) {
     console.log(error);
   }

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Product = require('./Product')
 
 const cartSchema = new mongoose.Schema(
   {
@@ -28,6 +29,10 @@ const cartSchema = new mongoose.Schema(
   }
 );
 
+cartSchema.virtual("productCount").get(function () {
+  return this.products.reduce((count, item) => count + item.quantity, 0);
+});
+
 cartSchema.methods.calculateTotalPrice = async function () {
   await this.populate("products.product");
 
@@ -39,7 +44,18 @@ cartSchema.methods.calculateTotalPrice = async function () {
   return this.totalPrice;
 };
 
-cartSchema.pre("save", async function () {
+cartSchema.methods.calculateTotalPrice = async function () {
+  await this.populate("products.product");
+
+  this.totalPrice = this.products.reduce((total, item) => {
+    const price = item.product.price;
+    return total + price * item.quantity;
+  }, 0);
+
+  return this.totalPrice;
+};
+
+cartSchema.pre("save", async function (next) {
   await this.calculateTotalPrice();
   next();
 });
