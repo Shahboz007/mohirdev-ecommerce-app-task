@@ -6,6 +6,7 @@ exports.getCartPage = async (req, res) => {
     const cart = await Cart.findOne({ user: userId })
       .populate("products.product")
       .exec();
+    console.log("🚀 ~ exports.getCartPage= ~ cart:", cart)
 
     res.render("cart", {
       title: "My cart",
