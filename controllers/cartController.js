@@ -74,4 +74,23 @@ exports.decrementFromCart = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.deleteItemFromCart = async (req, res) => {
+  const { cartItemId } = req.params;
+
+  try {
+    let cart = await Cart.findOne({ user: req.session.user._id });
+
+    if (cart) {
+      cart.products = cart.products.filter((item) => item._id.toString() !== cartItemId);
+    }
+
+    await cart.save()
+
+    res.redirect("/carts");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 exports.clearCart = async (req, res) => {};

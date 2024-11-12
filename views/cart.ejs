@@ -37,7 +37,9 @@
               </div>
               <div class="ml-4 font-semibold text-gray-800">$<%-(item.product.price*item.quantity).toLocaleString()%>
               </div>
-              <button class="ml-4 text-red-500 hover:text-red-700">Remove</button>
+              <form action="/carts/<%-item._id%>/delete" method="POST">
+                <button class="ml-4 text-red-500 hover:text-red-700" type="submit">Remove</button>
+              </form>
             </div>
             <%})%>
         </div>
