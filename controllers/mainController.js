@@ -7,16 +7,28 @@ exports.getHomePage = async (req, res) => {
 
     let cartCount = 0;
     if (req.session.user) {
-      const cart = await Cart.findOne({user: req.session.user._id}).populate('products.product').exec();
+      const cart = await Cart.findOne({ user: req.session.user._id })
+        .populate("products.product")
+        .exec();
       cartCount = cart.productCount;
     }
 
     res.render("index", {
       title: "Home page",
       isAuth: Boolean(req.session.user),
-      productsData: products,
       cartCount,
+      productsData: products,
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.getProductsPage = async (req, res) => {
+  try {
+    const products = await Product.find();
+
+    res.render("products", { title: "Products", products });
   } catch (error) {
     console.log(error);
   }
