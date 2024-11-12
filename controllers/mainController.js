@@ -10,7 +10,7 @@ exports.getHomePage = async (req, res) => {
       const cart = await Cart.findOne({ user: req.session.user._id })
         .populate("products.product")
         .exec();
-      cartCount = cart.productCount;
+      cartCount = cart?.productCount || 0;
     }
 
     res.render("index", {

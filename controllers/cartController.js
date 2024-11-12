@@ -21,7 +21,7 @@ exports.addToCart = async (req, res) => {
   const { productId, quantity = 1 } = req.body;
 
   try {
-    const userId = req.session.user._id;
+    const userId = req.session.user?._id;
     let cart = await Cart.findOne({ user: userId });
 
     if (!cart) {
