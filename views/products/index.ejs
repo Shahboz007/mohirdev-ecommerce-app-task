@@ -62,8 +62,11 @@
                 </p>
                 <div class="flex items-center justify-between mt-4">
                   <span class="text-yellow-500">⭐⭐⭐⭐</span>
-                  <button class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 font-medium">Add to
-                    Cart</button>
+                  <form action="/carts" method="POST">
+                    <input type="hidden" name="productId" value="<%=item._id%>" readonly>
+                    <button class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 font-medium" type="submit">Add to
+                      Cart</button>
+                  </form>
                 </div>
               </div>
             </div>
