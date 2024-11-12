@@ -65,8 +65,14 @@
         </div>
 
         <!-- Checkout Button -->
-        <button class="w-full mt-4 p-3 bg-blue-500 text-white rounded hover:bg-blue-600 font-semibold">Proceed to
-          Checkout</button>
+        <form action="/checkout" method="POST">
+          <button class="w-full mt-4 p-3 bg-blue-500 text-white rounded hover:bg-blue-600 font-semibold"
+            <%=cart.products.length < 1 ? 'disabled' : '' %>
+            type="submit"
+            >
+            Proceed to Checkout
+          </button>
+        </form>
       </div>
 
     </div>
