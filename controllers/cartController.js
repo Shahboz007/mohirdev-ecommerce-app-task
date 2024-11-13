@@ -10,7 +10,7 @@ exports.getCartPage = async (req, res) => {
     res.render("cart", {
       title: "My cart",
       cart,
-      cartCount: cart.productCount,
+      cartCount: cart?.productCount || 0,
       isAuth: Boolean(req.session.user),
     });
   } catch (error) {
@@ -22,7 +22,7 @@ exports.addToCart = async (req, res) => {
   try {
     const userId = req.session.user?._id;
     let cart = await Cart.findOne({ user: userId });
-    
+
     if (!cart) {
       cart = new Cart({
         user: userId,
@@ -81,10 +81,12 @@ exports.deleteItemFromCart = async (req, res) => {
     let cart = await Cart.findOne({ user: req.session.user._id });
 
     if (cart) {
-      cart.products = cart.products.filter((item) => item._id.toString() !== cartItemId);
+      cart.products = cart.products.filter(
+        (item) => item._id.toString() !== cartItemId
+      );
     }
 
-    await cart.save()
+    await cart.save();
 
     res.redirect("/carts");
   } catch (error) {

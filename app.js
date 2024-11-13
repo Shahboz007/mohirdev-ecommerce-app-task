@@ -55,6 +55,7 @@ app.use('/', require('./routes/mainRoute'));
 app.use("/auth", require("./routes/authRoute"));
 app.use("/products", require("./routes/productRoute"));
 app.use("/carts", require("./routes/cartRoute"));
+app.use("/orders", require("./routes/orderRoute"));
 app.use("/dashboard", require("./routes/dashboard/dashboardRoute"));
 app.use("/dashboard/users", require('./routes/dashboard/dashboardUserRoute'));
 app.use("/dashboard/products", require('./routes/dashboard/dashboardProductRoute'));
