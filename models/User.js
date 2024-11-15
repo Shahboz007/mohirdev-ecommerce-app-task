@@ -30,12 +30,6 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    orders: [
-      {
-        type: mongoose.Types.ObjectId,
-        ref: "Order",
-      },
-    ],
   },
   {
     timestamps: true,
