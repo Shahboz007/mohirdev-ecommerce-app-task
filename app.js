@@ -53,6 +53,7 @@ app.use(flash());
 // Routes
 app.use('/', require('./routes/mainRoute'));
 app.use("/auth", require("./routes/authRoute"));
+app.use("/profile", require("./routes/profileRoute"));
 app.use("/products", require("./routes/productRoute"));
 app.use("/carts", require("./routes/cartRoute"));
 app.use("/orders", require("./routes/orderRoute"));
