@@ -51,4 +51,3 @@ exports.createNewOrder = async (req, res) => {
     console.log(error);
   }
 };
-exports.cancelOrder = async (req, res) => {};
