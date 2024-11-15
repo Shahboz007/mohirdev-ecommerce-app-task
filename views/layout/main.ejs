@@ -18,4 +18,19 @@
 </body>
 
 <script src="/assets/js/main.js"></script>
+<script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdown');
+      dropdown.classList.toggle('hidden');
+    }
+  
+    // Close dropdown if clicked outside
+    document.addEventListener('click', function (event) {
+      const dropdown = document.getElementById('dropdown');
+      const button = event.target.closest('button');
+      if (!button || button !== document.querySelector('button[onclick="toggleDropdown()"]')) {
+        dropdown.classList.add('hidden');
+      }
+    });
+  </script>
 </html>
