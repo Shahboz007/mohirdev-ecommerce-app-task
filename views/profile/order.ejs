@@ -43,16 +43,16 @@
                     <td class="px-4 py-2 border text-center">$<%=item.totalPrice.toLocaleString()%>
                     </td>
                     <td class="px-4 py-2 border text-center">
-                      <%=item.products.length%>
+                      <%=item.totalAmount.toLocaleString()%>
                     </td>
                     <td class="px-4 py-2 border text-center">
-                      <%=item.totalAmount.toLocaleString()%>
+                      <%=item.products.length%>
                     </td>
                     <td class="px-4 py-2 border text-center">
                       <%=item.address%>
                     </td>
                     <td class="px-4 py-2 border text-center">
-                      <a href="/orders/12345" class="text-blue-600 hover:underline">View Details</a>
+                      <a href="/profile/orders/<%=item._id%>/details" class="text-blue-600 hover:underline">View&nbsp;Details</a>
                     </td>
                   </tr>
                   <%})%>

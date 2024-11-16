@@ -33,22 +33,42 @@ exports.updateUserData = async (req, res) => {
   }
 };
 
-exports.getProfileOrdersPage = async (req, res) => {
+exports.getProfileOrderPage = async (req, res) => {
   const userId = req.session.user._id;
 
-  const cart = await Cart.findOne({ user: req.session.user._id })
+  const cart = await Cart.findOne({ user: userId })
     .populate("products.product")
     .exec();
   const cartCount = cart?.productCount || 0;
 
   // Orders
   const orders = await Order.find({ user: userId });
-  
 
   res.render("profile/order", {
     title: "My Orders | Profile",
     isAuth: Boolean(req.session.user),
     cartCount,
     orderData: orders,
+  });
+};
+
+exports.getProfileOrderDetailsPage = async (req, res) => {
+  const userId = req.session.user._id;
+
+  const cart = await Cart.findOne({ user: userId })
+    .populate("products.product")
+    .exec();
+  const cartCount = cart?.productCount || 0;
+
+  // Orders
+  const order = await Order.findOne({ user: userId, _id: req.params.id }).populate('products.product').exec();
+
+  console.log('render', order);
+  
+  res.render("profile/orderDetails", {
+    title: "My Orders | Profile",
+    isAuth: Boolean(req.session.user),
+    cartCount,
+    orderData: order,
   });
 };
