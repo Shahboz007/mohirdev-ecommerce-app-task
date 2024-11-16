@@ -17,8 +17,9 @@ const orderSchema = new mongoose.Schema({
         },
     ],
     totalAmount: { type: Number, required: true },
+    totalPrice: { type: Number, required: true },
     address: { type: String, required: true },
-    status: { type: String, default: "Pending" }, // Pending, Shipped, Delivered
+    status: { type: String, default: "Pending" }, // Pending, Delivered, Canceled
     createdAt: { type: Date, default: Date.now },
 });
 

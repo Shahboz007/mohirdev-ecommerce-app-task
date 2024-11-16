@@ -7,16 +7,30 @@
     <title>
         <%= title || 'Ecommerce-app' %>
     </title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
 
-<body>
-
-    <main>
-        <%- body %>
-    </main>
+    <%- body %>
+    
     <script src="https://cdn.tailwindcss.com"></script>
 </body>
 
 <script src="/assets/js/main.js"></script>
+<script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdown');
+      dropdown.classList.toggle('hidden');
+    }
+  
+    // Close dropdown if clicked outside
+    document.addEventListener('click', function (event) {
+      const dropdown = document.getElementById('dropdown');
+      const button = event.target.closest('button');
+      if (!button || button !== document.querySelector('button[onclick="toggleDropdown()"]')) {
+        dropdown.classList.add('hidden');
+      }
+    });
+  </script>
 </html>

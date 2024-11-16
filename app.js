@@ -51,11 +51,17 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
 
 // Routes
-app.use("/auth", require("./routes/auth.route"));
-app.use("/dashboard", require("./routes/dashboard/dashboard.route"));
-app.use("/", (req, res) => {
-    return res.render("index", { title: "Home page" });
-});
+app.use('/', require('./routes/mainRoute'));
+app.use("/auth", require("./routes/authRoute"));
+app.use("/profile", require("./routes/profileRoute"));
+app.use("/products", require("./routes/productRoute"));
+app.use("/carts", require("./routes/cartRoute"));
+app.use("/orders", require("./routes/orderRoute"));
+app.use("/dashboard", require("./routes/dashboard/dashboardRoute"));
+app.use("/dashboard/orders", require("./routes/dashboard/dashboardOrderRoute"));
+app.use("/dashboard/users", require('./routes/dashboard/dashboardUserRoute'));
+app.use("/dashboard/products", require('./routes/dashboard/dashboardProductRoute'));
+app.use("/dashboard/reports", require('./routes/dashboard/dashboardReportRoute'));
 
 const PORT = process.env.PORT || 3030;
 

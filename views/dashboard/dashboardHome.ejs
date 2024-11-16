@@ -1,1 +1,68 @@
-Dashboard
+<%- include('../partials/dashboardHeaderAndSidebar.ejs') %>
+
+    <!-- Statistics Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <p class="text-gray-600">Total Users</p>
+            <p class="text-2xl font-bold">
+                <%=totalData.usersCount.toLocaleString()%>
+            </p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <p class="text-gray-600">New Orders</p>
+            <p class="text-2xl font-bold">
+                <%=totalData.ordersCount.toLocaleString()%>
+            </p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <p class="text-gray-600">Income</p>
+            <p class="text-2xl font-bold">$<%=totalData.totalIncome.toLocaleString()%>
+            </p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <p class="text-gray-600">Products Sold</p>
+            <p class="text-2xl font-bold"><%=totalData.totalSold.toLocaleString()%></p>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-lg font-semibold text-gray-800">Sales Chart</h2>
+            <div class="mt-4 bg-gray-200 h-32 rounded-lg flex items-center justify-center">
+                <p class="text-gray-500">[Insert Sales Chart]</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-lg font-semibold text-gray-800">User Growth</h2>
+            <div class="mt-4 bg-gray-200 h-32 rounded-lg flex items-center justify-center">
+                <p class="text-gray-500">[Insert Growth Chart]</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity Section -->
+    <div class="mt-6">
+        <h2 class="text-xl font-semibold text-gray-800">Recent Activity</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mt-4">
+            <ul>
+                <li class="py-3 border-b border-gray-200">
+                    <p class="text-gray-600"><span class="font-semibold text-gray-800">User123</span> placed an order
+                    </p>
+                    <p class="text-sm text-gray-500">2 hours ago</p>
+                </li>
+                <li class="py-3 border-b border-gray-200">
+                    <p class="text-gray-600"><span class="font-semibold text-gray-800">User456</span> updated profile
+                    </p>
+                    <p class="text-sm text-gray-500">5 hours ago</p>
+                </li>
+                <li class="py-3">
+                    <p class="text-gray-600"><span class="font-semibold text-gray-800">User789</span> added a new
+                        product</p>
+                    <p class="text-sm text-gray-500">1 day ago</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <%- include('../partials/dashboardFooter.ejs')%>
