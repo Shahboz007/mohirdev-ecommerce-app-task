@@ -1,0 +1,64 @@
+<%- include('../../partials/dashboardHeaderAndSidebar.ejs') %>
+  <!-- Main Content -->
+  <main class="flex-1 p-6">
+    <h1 class="text-3xl font-semibold text-gray-800 mb-6">Manage Orders</h1>
+
+    <div class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-xl font-semibold text-gray-700 mb-4">All Orders</h2>
+
+      <div class="overflow-x-auto">
+        <table class="w-full table-auto border-collapse border border-gray-300">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="px-4 py-2 border">Order ID</th>
+              <th class="px-4 py-2 border">Customer</th>
+              <th class="px-4 py-2 border">Date</th>
+              <th class="px-4 py-2 border">Status</th>
+              <th class="px-4 py-2 border">Total</th>
+              <th class="px-4 py-2 border">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Example Order Row -->
+            <tr>
+              <td class="px-4 py-2 border text-center">#12345</td>
+              <td class="px-4 py-2 border text-center">John Doe</td>
+              <td class="px-4 py-2 border text-center">2024-11-13</td>
+              <td class="px-4 py-2 border text-center">
+                <select class="p-1 border rounded">
+                  <option value="completed">Completed</option>
+                  <option value="processing" selected>Processing</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </td>
+              <td class="px-4 py-2 border text-center">$120.00</td>
+              <td class="px-4 py-2 border text-center">
+                <a href="/admin/orders/12345" class="text-blue-600 hover:underline mr-2">View</a>
+                <button class="text-red-600 hover:underline">Delete</button>
+              </td>
+            </tr>
+            <!-- Example Order Row -->
+            <tr>
+              <td class="px-4 py-2 border text-center">#12346</td>
+              <td class="px-4 py-2 border text-center">Jane Smith</td>
+              <td class="px-4 py-2 border text-center">2024-11-10</td>
+              <td class="px-4 py-2 border text-center">
+                <select class="p-1 border rounded">
+                  <option value="completed">Completed</option>
+                  <option value="processing">Processing</option>
+                  <option value="cancelled" selected>Cancelled</option>
+                </select>
+              </td>
+              <td class="px-4 py-2 border text-center">$75.00</td>
+              <td class="px-4 py-2 border text-center">
+                <a href="/admin/orders/12346" class="text-blue-600 hover:underline mr-2">View</a>
+                <button class="text-red-600 hover:underline">Delete</button>
+              </td>
+            </tr>
+            <!-- Additional orders as necessary -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  <%- include('../../partials/dashboardFooter.ejs')%>
