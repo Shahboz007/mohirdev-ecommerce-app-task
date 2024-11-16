@@ -33,9 +33,9 @@
           <select id="status" name="status"
             class="mb-4 w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             required>
-            <option value="Cancel">Cancel</option>
-            <option value="Ordered">Ordered</option>
-            <option value="Pending">Pending</option>
+            <option value="Delivered" <%=orderData.status==='Delivered' ?'selected':''%> >Delivered</option>
+            <option value="Canceled" <%=orderData.status==='Canceled' ?'selected':''%> >Canceled</option>
+            <option value="Pending" <%=orderData.status==='Pending' ?'selected':''%> >Pending</option>
           </select>
 
           <button type="submit"
