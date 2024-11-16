@@ -1,4 +1,5 @@
 const Cart = require("../models/Cart");
+const Order = require("../models/Order");
 const User = require("../models/User");
 
 exports.getProfilePage = async (req, res) => {
@@ -16,32 +17,38 @@ exports.getProfilePage = async (req, res) => {
   });
 };
 
-exports.updateUserData = async(req, res) => {
-  const {name, email} = req.body
-  console.log("🚀 ~ exports.updateUserData=async ~ email:", email)
+exports.updateUserData = async (req, res) => {
+  const { name, email } = req.body;
 
-  try{
+  try {
     const user = await User.findById(req.session.user._id);
-    if(name) user.name = name;
-    if(email) user.email = email;
+    if (name) user.name = name;
+    if (email) user.email = email;
 
     await user.save();
 
-    res.redirect('/profile');
-  }catch(error){
-    console.log(error)
+    res.redirect("/profile");
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
 exports.getProfileOrdersPage = async (req, res) => {
+  const userId = req.session.user._id;
+
   const cart = await Cart.findOne({ user: req.session.user._id })
     .populate("products.product")
     .exec();
   const cartCount = cart?.productCount || 0;
 
+  // Orders
+  const orders = await Order.find({ user: userId });
+  
+
   res.render("profile/order", {
     title: "My Orders | Profile",
     isAuth: Boolean(req.session.user),
     cartCount,
+    orderData: orders,
   });
 };
