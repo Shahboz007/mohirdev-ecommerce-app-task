@@ -20,42 +20,21 @@
           </thead>
           <tbody>
             <!-- Example Order Row -->
-            <tr>
-              <td class="px-4 py-2 border text-center">#12345</td>
-              <td class="px-4 py-2 border text-center">John Doe</td>
-              <td class="px-4 py-2 border text-center">2024-11-13</td>
-              <td class="px-4 py-2 border text-center">
-                <select class="p-1 border rounded">
-                  <option value="completed">Completed</option>
-                  <option value="processing" selected>Processing</option>
-                  <option value="cancelled">Cancelled</option>
-                </select>
-              </td>
-              <td class="px-4 py-2 border text-center">$120.00</td>
-              <td class="px-4 py-2 border text-center">
-                <a href="/admin/orders/12345" class="text-blue-600 hover:underline mr-2">View</a>
-                <button class="text-red-600 hover:underline">Delete</button>
-              </td>
-            </tr>
-            <!-- Example Order Row -->
-            <tr>
-              <td class="px-4 py-2 border text-center">#12346</td>
-              <td class="px-4 py-2 border text-center">Jane Smith</td>
-              <td class="px-4 py-2 border text-center">2024-11-10</td>
-              <td class="px-4 py-2 border text-center">
-                <select class="p-1 border rounded">
-                  <option value="completed">Completed</option>
-                  <option value="processing">Processing</option>
-                  <option value="cancelled" selected>Cancelled</option>
-                </select>
-              </td>
-              <td class="px-4 py-2 border text-center">$75.00</td>
-              <td class="px-4 py-2 border text-center">
-                <a href="/admin/orders/12346" class="text-blue-600 hover:underline mr-2">View</a>
-                <button class="text-red-600 hover:underline">Delete</button>
-              </td>
-            </tr>
-            <!-- Additional orders as necessary -->
+            <%orderData.forEach(item=> {%>
+              <tr>
+                <td class="px-4 py-2 border text-center">#<%=item._id%></td>
+                <td class="px-4 py-2 border text-center"><%=item.user.name%></td>
+                <td class="px-4 py-2 border text-center"><%=item.createdAt.toLocaleDateString()%></td>
+                <td class="px-4 py-2 border text-center">
+                  <%- include('../../partials/status.ejs', status=item.status)%>
+                </td>
+                <td class="px-4 py-2 border text-center">$<%=item.totalPrice.toLocaleString()%></td>
+                <td class="px-4 py-2 border text-center">
+                  <a href="/admin/orders/12345" class="text-blue-600 hover:underline mr-2">View</a>
+                  <button class="text-red-600 hover:underline">Delete</button>
+                </td>
+              </tr>
+              <%})%>
           </tbody>
         </table>
       </div>
